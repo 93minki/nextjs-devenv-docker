@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frontend-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app # 로컬 프로젝트를 컨테이너 /app에 마운트
+      - /app/node_modules # 컨테이너 내부 node_modules 유지
+    working_dir: /app
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
+    command: yarn dev
